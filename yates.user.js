@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         OPS YATES
-// @version      1.0
+// @version      1.1
 // @description  Yet Another Torrent Editing Script
 // @author       You
 // @match        https://orpheus.network/torrents.php?id=*
@@ -137,7 +137,7 @@
             yearInput.value === editFormData.get('year') &&
             rTypeSelect.value === editFormData.get('releasetype');
 
-        const validYear = 1940 < Number(yearInput.value) && Number(yearInput.value) <= new Date().getFullYear() + 1;
+        const validYear = 1940 <= Number(yearInput.value) && Number(yearInput.value) <= new Date().getFullYear() + 1;
         titleSubmit.disabled = unchanged || !validYear
     };
 
@@ -189,7 +189,31 @@
         titleSubmit.addEventListener('click', doEdit);
         titleInput.addEventListener('input', setTitleSubmitDisabled);
         yearInput.addEventListener('input', setTitleSubmitDisabled);
+        yearInput.addEventListener('wheel', e => {
+            e.preventDefault();
+            let currenValue = Number(yearInput.value);
+            if (e.deltaY > 0) {
+                currenValue = Math.max(1940, currenValue - 1);
+            }
+            else if (e.deltaY < 0) {
+                currenValue = Math.min(new Date().getFullYear() + 1, currenValue + 1);
+            }
+            yearInput.value = currenValue;
+            yearInput.dispatchEvent(new Event('input'));
+        });
         rTypeSelect.addEventListener('input', setTitleSubmitDisabled);
+        rTypeSelect.addEventListener('wheel', e => {
+            e.preventDefault();
+            let currentIndex = rTypeSelect.selectedIndex;
+            if (e.deltaY < 0) {
+                currentIndex = Math.max(0, currentIndex - 1);
+            }
+            else if (e.deltaY > 0) {
+                currentIndex = Math.min(rTypeSelect.options.length - 1, currentIndex + 1);
+            }
+            rTypeSelect.selectedIndex = currentIndex;
+            rTypeSelect.dispatchEvent(new Event('input'));
+        });
 
         titleFlexWrapper.append(titleMiniForm);
     }
