@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         OPS YATES
-// @version      1.1.1
+// @version      1.1.2
 // @description  Yet Another Torrent Editing Script
 // @author       You
 // @match        https://orpheus.network/torrents.php?id=*
