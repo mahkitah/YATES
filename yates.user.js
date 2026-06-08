@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         OPS YATES
-// @version      1.1
+// @version      1.1.1
 // @description  Yet Another Torrent Editing Script
 // @author       You
 // @match        https://orpheus.network/torrents.php?id=*
@@ -9,6 +9,8 @@
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_registerMenuCommand
+// @updateURL    https://raw.githubusercontent.com/mahkitah/YATES/master/yates.user.js
+// @downloadURL  https://raw.githubusercontent.com/mahkitah/YATES/master/yates.user.js
 // ==/UserScript==
 
 (() => {
